@@ -21,6 +21,6 @@ public class FarmException extends Exception{
     }
 
     public FarmException (FarmExceptionEnum exceptionEnum) {
-        this(exceptionEnum.getCode(),exceptionEnum.getMes());
+        this(exceptionEnum.getCode(),exceptionEnum.getMessage());
     }
 }
