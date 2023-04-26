@@ -1,8 +1,6 @@
 package com.farm.controller;
 
 import com.farm.annotation.ApiVersion;
-import com.farm.exception.FarmException;
-import com.farm.exception.FarmExceptionEnum;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +23,6 @@ public class BigDataController {
 
     @RequestMapping("print")
     public ResponseResult<Object> getUser () {
-        new FarmException(FarmExceptionEnum.NO_ENUM.getCode(), FarmExceptionEnum.NO_ENUM.getMes());
         return ResponseResult.success("v1");
     }
 
