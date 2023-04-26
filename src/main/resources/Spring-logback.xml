@@ -1,65 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property resource="logback.properties"/>
-    <appender name="CONSOLE-LOG" class="ch.qos.logback.core.ConsoleAppender">
-        <!--此过滤器过滤掉所有的trace日志，3.4.1版本logback自带的过滤类-->
-        <filter class="com.plumelog.logback.util.FilterSyncLogger">
-            <filterPackage>com.plumelog.trace.aspect.AbstractAspect</filterPackage>
-        </filter>
+    <!-- 日志根目录-->
+    <springProperty scope="context" name="LOG_HOME" source="logging.path" defaultValue="/data/logs/springboot-logback-demo"/>
+
+    <!-- 日志级别 -->
+    <springProperty scope="context" name="LOG_ROOT_LEVEL" source="logging.level.root" defaultValue="DEBUG"/>
+
+    <!--  标识这个"STDOUT" 将会添加到这个logger -->
+    <springProperty scope="context" name="STDOUT" source="log.stdout" defaultValue="STDOUT"/>
+
+    <!-- 日志文件名称-->
+    <property name="LOG_PREFIX" value="spring-boot-logback" />
+
+    <!-- 日志文件编码-->
+    <property name="LOG_CHARSET" value="UTF-8" />
+
+    <!-- 日志文件路径+日期-->
+    <property name="LOG_DIR" value="${LOG_HOME}/%d{yyyyMMdd}" />
+
+    <!--对日志进行格式化-->
+    <property name="LOG_MSG" value="- | [%X{requestUUID}] | [%d{yyyyMMdd HH:mm:ss.SSS}] | [%level] | [${HOSTNAME}] | [%thread] | [%logger{36}] | --> %msg|%n "/>
+
+    <!--文件大小，默认10MB-->
+    <property name="MAX_FILE_SIZE" value="50MB" />
+
+    <!-- 配置日志的滚动时间 ，表示只保留最近 10 天的日志-->
+    <property name="MAX_HISTORY" value="10"/>
+
+    <!--输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 输出的日志内容格式化-->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <!--            <pattern>%d [%t] %-5p [%c] - %m%n</pattern>-->
-            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{10}) - %cyan(%msg%n)</pattern>
+            <pattern>${LOG_MSG}</pattern>
         </layout>
     </appender>
-    <!--收集除error级别以外的日志-->
-    <appender name="INFO-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <!--输出到文件-->
+    <appender name="0" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    </appender>
+
+    <!-- 定义 ALL 日志的输出方式:-->
+    <appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志文件路径，日志文件名称-->
+        <File>${LOG_HOME}/all_${LOG_PREFIX}.log</File>
+
+        <!-- 设置滚动策略，当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--日志文件路径，新的 ALL 日志文件名称，“ i ” 是个变量 -->
+            <FileNamePattern>${LOG_DIR}/all_${LOG_PREFIX}%i.log</FileNamePattern>
+
+            <!-- 配置日志的滚动时间 ，表示只保留最近 10 天的日志-->
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+
+            <!--当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+        </rollingPolicy>
+
+        <!-- 输出的日志内容格式化-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${LOG_MSG}</pattern>
+        </layout>
+    </appender>
+
+    <!-- 定义 ERROR 日志的输出方式:-->
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 下面为配置只输出error级别的日志 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
         </filter>
-        <encoder>
-            <pattern>%d [%t] %-5p [%c] - %m%n</pattern>
-        </encoder>
-        <!--滚动策略-->
+        <!--日志文件路径，日志文件名称-->
+        <File>${LOG_HOME}/err_${LOG_PREFIX}.log</File>
+
+        <!-- 设置滚动策略，当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--路径-->
-            <fileNamePattern>${LOG_INFO_HOME}/sys.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
+
+            <!--日志文件路径，新的 ERR 日志文件名称，“ i ” 是个变量 -->
+            <FileNamePattern>${LOG_DIR}/err_${LOG_PREFIX}%i.log</FileNamePattern>
+
+            <!-- 配置日志的滚动时间 ，表示只保留最近 10 天的日志-->
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+
+            <!--当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
+
+        <!-- 输出的日志内容格式化-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${LOG_MSG}</Pattern>
+        </layout>
     </appender>
 
+    <!-- additivity 设为false,则logger内容不附加至root ，配置以配置包下的所有类的日志的打印，级别是 ERROR-->
+    <logger name="org.springframework"     level="ERROR" />
+    <logger name="org.apache.commons"      level="ERROR" />
+    <logger name="org.apache.zookeeper"    level="ERROR"  />
+    <logger name="com.alibaba.dubbo.monitor" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.remoting" level="ERROR" />
 
-    <appender name="ERROR-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
-        <encoder>
-            <pattern>%d [%t] %-5p [%c] - %m%n</pattern>
-        </encoder>
-        <!--滚动策略-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--路径-->
-            <fileNamePattern>${LOG_ERROR_HOME}//%d.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-    </appender>
+    <!-- ${LOG_ROOT_LEVEL} 日志级别 -->
+    <root level="${LOG_ROOT_LEVEL}">
 
-    <!-- 使用lite模式启用下面配置 -->
-    <appender name="plumelog"  class="com.plumelog.logback.appender.LiteAppender">
-        <appName>jxue-worker</appName>
-        <plumelogHost>81.70.43.213:8892</plumelogHost>
-    </appender>
+        <!-- 标识这个"${STDOUT}"将会添加到这个logger -->
+        <appender-ref ref="${STDOUT}"/>
 
-    <root level="info">
-        <appender-ref ref="CONSOLE-LOG" />
-        <appender-ref ref="INFO-LOG" />
-        <appender-ref ref="ERROR-LOG" />
-        <appender-ref ref="plumelog"/>
+        <!-- FILE_ALL 日志输出添加到 logger -->
+        <appender-ref ref="FILE_ALL"/>
 
-        <!--异步输出日志-->
-        <!--<appender-ref ref="ASYNC-INFO" />-->
-        <!--<appender-ref ref="ASYNC-ERROR" />-->
+        <!-- FILE_ERROR 日志输出添加到 logger -->
+        <appender-ref ref="FILE_ERROR"/>
     </root>
+
 </configuration>

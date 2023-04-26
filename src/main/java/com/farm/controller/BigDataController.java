@@ -1,5 +1,8 @@
 package com.farm.controller;
 
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @description: 大数据展示页面
  */
 @RestController
-@RequestMapping("/api/v1/big/data/")
+@RequestMapping("/big/data")
+@Api(value = "BigDataController", tags = "data Interface")
+@Slf4j
 public class BigDataController {
+
+
+    @GetMapping("/print")
+    public void print () {
+        log.info("BigDataController");
+    }
 
 }
