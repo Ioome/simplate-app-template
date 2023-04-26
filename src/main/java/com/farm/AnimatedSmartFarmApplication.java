@@ -30,6 +30,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @Slf4j
 @EnableAsync
+@EnableOpenApi
 @EnableScheduling
 @MapperScan(basePackages = "com.farm.dao")
 public class AnimatedSmartFarmApplication extends SpringBootServletInitializer implements CommandLineRunner {

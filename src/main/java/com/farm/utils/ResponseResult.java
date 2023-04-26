@@ -1,7 +1,6 @@
 package com.farm.utils;
 
 import com.farm.enums.ResponseStatus;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -22,25 +21,22 @@ public class ResponseResult<T> implements Serializable {
     /**
      * response timestamp.
      */
-    @ApiModelProperty(value = "返回时间")
+
     private long timestamp;
 
     /**
      * response code, 200 -> OK.
      */
-    @ApiModelProperty(value = "返回数据")
+
     private String status;
 
-    /**
-     * response message.
-     */
-    @ApiModelProperty(value = "返回信息")
+
     private String message;
 
     /**
      * response data.
      */
-    @ApiModelProperty(value = "返回数据")
+
     private T data;
 
     /**
