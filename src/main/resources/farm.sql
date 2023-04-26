@@ -1,0 +1,209 @@
+CREATE TABLE `planting`
+(
+    `id`                         bigint   NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+    `code`                       varchar(200)      DEFAULT NULL COMMENT '编号',
+    `land_name`                  varchar(200)      DEFAULT NULL COMMENT '土地名称',
+    `scale`                      varchar(200)      DEFAULT NULL COMMENT '规模',
+    `area`                       int               DEFAULT NULL COMMENT '面积',
+    `planting_plant_number`      BIGINT            DEFAULT 0 COMMENT '种植数量',
+    `status`                     varchar(200)      DEFAULT NULL COMMENT '状态 1 启动计划  2 正在进行 3 废弃',
+    `suitable_crop`              varchar(200)      DEFAULT NULL COMMENT '适合作物',
+    `plant_name`                 varchar(200)      DEFAULT NULL COMMENT '植物名称',
+    `classification`             varchar(200)      DEFAULT NULL COMMENT '分类',
+    `growth_cycle`               varchar(200)      DEFAULT NULL COMMENT '生长周期',
+    `temperature_recommendation` varchar(200)      DEFAULT NULL COMMENT '温度建议',
+    `humidity_recommendation`    varchar(200)      DEFAULT NULL COMMENT '湿度建议',
+    `plant_image`                varchar(200)      DEFAULT NULL COMMENT '植物图片',
+    `planting_date`              date              DEFAULT NULL COMMENT '种植日期',
+    `harvest_date`               date              DEFAULT NULL COMMENT '收割日期',
+    `current_status`             varchar(200)      DEFAULT NULL COMMENT '当前状态',
+    `remarks`                    varchar(200)      DEFAULT NULL COMMENT '备注',
+    `username`                   varchar(200)      DEFAULT NULL COMMENT '用户名',
+    `phone_number`               varchar(200)      DEFAULT NULL COMMENT '手机号码',
+    `user_id`                    bigint   NOT NULL COMMENT '用户 id',
+    `created_time`               datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                datetime          DEFAULT NULL COMMENT '更新时间',
+    `update_by`                  INT               DEFAULT NULL COMMENT '更新人',
+    `create_by`                  INT               DEFAULT NULL COMMENT '创建人',
+    `delete_time`                datetime          DEFAULT NULL COMMENT '删除（null.正常)',
+    `plant_id`                   INT               DEFAULT NULL COMMENT '植物id',
+    `block_id`                   INT               DEFAULT NULL COMMENT '区块id ',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = utf8 COMMENT ='种植表';
+
+
+CREATE TABLE `environment`
+(
+    `id`               bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `air_temperature`  varchar(200) NOT NULL COMMENT '环境温度',
+    `air_humidity `    varchar(200) NOT NULL COMMENT '空气湿度',
+    `bright_sunshine`  varchar(200)          DEFAULT NULL COMMENT '湿度状态',
+    `soil_temperature` varchar(200)          DEFAULT NULL COMMENT '土壤温度',
+    `soil_humidity `   varchar(200)          DEFAULT NULL COMMENT '土壤湿度',
+    `other`            varchar(200)          DEFAULT NULL COMMENT '其它',
+    `user_name`        varchar(200)          DEFAULT NULL COMMENT '用户名',
+    `phone_number`     varchar(200)          DEFAULT NULL COMMENT '手机',
+    `user_id`          bigint       NOT NULL COMMENT '用户id',
+    `created_time`     datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime              DEFAULT NULL COMMENT '更新时间',
+    `update_by`        INT                   DEFAULT NULL COMMENT '更新人',
+    `create_by`        INT                   DEFAULT NULL COMMENT '创建人',
+    `delete_time`      datetime              DEFAULT NULL COMMENT '删除（null.正常)',
+    `parent_id`        BIGINT                DEFAULT NULL COMMENT '主环境id',
+    `block_id`         BIGINT                DEFAULT NULL COMMENT '区块',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1608432827022
+  DEFAULT CHARSET = utf8 COMMENT ='环境';
+
+
+
+CREATE TABLE `block`
+(
+    `id`            bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `code`          varchar(200) NOT NULL COMMENT '编号',
+    `land_name`     varchar(200) NOT NULL COMMENT '土地名称',
+    `land_code`     varchar(200) NOT NULL COMMENT '土地编码',
+    `land_time`     datetime     NOT NULL COMMENT '土地期限',
+    `land_position` varchar(200) NOT NULL COMMENT '土地地理位置',
+    `image`         varchar(200)          DEFAULT NULL COMMENT '图片',
+    `scale`         varchar(200)          DEFAULT NULL COMMENT '规模',
+    `area`          int                   DEFAULT NULL COMMENT '面积',
+    `land_status`   varchar(200)          DEFAULT NULL COMMENT '状态',
+    `suitable_crop` varchar(200)          DEFAULT NULL COMMENT '适合作物',
+    `details`       longtext COMMENT '详情',
+    `click_time`    datetime              DEFAULT NULL COMMENT '最后点击时间',
+    `click_count`   int                   DEFAULT '0' COMMENT '点击数',
+    `created_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`   datetime              DEFAULT NULL COMMENT '更新时间',
+    `update_by`     INT                   DEFAULT NULL COMMENT '更新人',
+    `create_by`     INT                   DEFAULT NULL COMMENT '创建人',
+    `delete_time`   datetime              DEFAULT NULL COMMENT '删除（null.正常)',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `code` (`code`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 7
+  DEFAULT CHARSET = utf8 COMMENT ='block';
+
+
+
+CREATE TABLE `plant`
+(
+    `id`                   bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `plant_name`           varchar(200) NOT NULL COMMENT '植物名称',
+    `plant_classification` varchar(200)          DEFAULT NULL COMMENT '分类',
+    `picture`              varchar(200)          DEFAULT NULL COMMENT '图片',
+    `growth_cycle`         varchar(200)          DEFAULT NULL COMMENT '生长周期',
+    `nutritional_value`    varchar(200)          DEFAULT NULL COMMENT '营养价值',
+    `fert_varieties`       varchar(200)          DEFAULT NULL COMMENT '施肥品种',
+    `sun_cycle`            varchar(200)          DEFAULT NULL COMMENT '光照周期',
+    `land_condition`       varchar(200)          DEFAULT NULL COMMENT '土壤建议',
+    `temp_condition`       varchar(200)          DEFAULT NULL COMMENT '温度建议',
+    `humidity_condition`   varchar(200)          DEFAULT NULL COMMENT '湿度建议',
+    `remark`               varchar(200)          DEFAULT NULL COMMENT '备注',
+    `created_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`          datetime              DEFAULT NULL COMMENT '更新时间',
+    `update_by`            INT                   DEFAULT NULL COMMENT '更新人',
+    `create_by`            INT                   DEFAULT NULL COMMENT '创建人',
+    `delete_time`          datetime              DEFAULT NULL COMMENT '删除（null.正常)',
+    `warehouse_id`         INT                   DEFAULT NULL COMMENT '仓库id',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `plant_name` (`plant_name`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 7
+  DEFAULT CHARSET = utf8 COMMENT ='植物';
+
+
+
+CREATE TABLE `plant`
+(
+    `id`                   bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `plant_name`           varchar(200) NOT NULL COMMENT '植物名称',
+    `plant_classification` varchar(200)          DEFAULT NULL COMMENT '分类',
+    `picture`              varchar(200)          DEFAULT NULL COMMENT '图片',
+    `growth_cycle`         varchar(200)          DEFAULT NULL COMMENT '生长周期',
+    `nutritional_value`    varchar(200)          DEFAULT NULL COMMENT '营养价值',
+    `fert_varieties`       varchar(200)          DEFAULT NULL COMMENT '施肥品种',
+    `sun_cycle`            varchar(200)          DEFAULT NULL COMMENT '光照周期',
+    `land_condition`       varchar(200)          DEFAULT NULL COMMENT '土壤建议',
+    `temp_condition`       varchar(200)          DEFAULT NULL COMMENT '温度建议',
+    `humidity_condition`   varchar(200)          DEFAULT NULL COMMENT '湿度建议',
+    `remark`               varchar(200)          DEFAULT NULL COMMENT '备注',
+    `created_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`          datetime              DEFAULT NULL COMMENT '更新时间',
+    `update_by`            INT                   DEFAULT NULL COMMENT '更新人',
+    `create_by`            INT                   DEFAULT NULL COMMENT '创建人',
+    `delete_time`          datetime              DEFAULT NULL COMMENT '删除（null.正常)',
+    `warehouse_id`         INT                   DEFAULT NULL COMMENT '仓库id',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `plant_name` (`plant_name`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 7
+  DEFAULT CHARSET = utf8 COMMENT ='植物';
+
+
+
+CREATE TABLE `change_water`
+(
+    `id`                 bigint   NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `bianhao`            varchar(200)      DEFAULT NULL COMMENT '编号',
+    `land_name`      varchar(200)      DEFAULT NULL COMMENT '土地名称',
+    `change_create_time` date              DEFAULT NULL COMMENT '换水日期',
+    `statue`             varchar(200)      DEFAULT NULL COMMENT '当前状态  0 未换水 1 已换水',
+    `next_change`        date              DEFAULT NULL COMMENT '下次换水',
+    `other`              varchar(200)      DEFAULT NULL COMMENT '其它',
+    `user_name`          varchar(200)      DEFAULT NULL COMMENT '用户名',
+    `phone_number`       varchar(200)      DEFAULT NULL COMMENT '手机号码',
+    `created_time`       datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`        datetime          DEFAULT NULL COMMENT '更新时间',
+    `update_by`          INT               DEFAULT NULL COMMENT '更新人',
+    `create_by`          INT               DEFAULT NULL COMMENT '创建人',
+    `delete_time`        datetime          DEFAULT NULL COMMENT '删除（null.正常)',
+    `userid`             bigint   NOT NULL COMMENT '用户id',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1608432839693
+  DEFAULT CHARSET = utf8 COMMENT ='换水';
+
+CREATE TABLE `plant_inventory_receipts`
+(
+    `id`             int(11) unsigned NOT NULL COMMENT '主键唯一标识入库单的 ID',
+    `receipt_number` varchar(20)           DEFAULT NULL COMMENT '入库单编号',
+    `receipt_date`   timestamp        NULL DEFAULT NULL COMMENT '入库时间',
+    `total_cost`     decimal(10, 2)        DEFAULT NULL COMMENT '所有植物成本',
+    `remarks`        varchar(20)           DEFAULT NULL COMMENT '入库单备注',
+    `create_by`      int(11)               DEFAULT NULL COMMENT '创建人id',
+    `create_time`    timestamp        NULL DEFAULT NULL COMMENT '创建时间',
+    `update_by`      int(11)               DEFAULT NULL COMMENT '更新人',
+    `update_time`    timestamp        NULL DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     tinyint(1)            DEFAULT '0' COMMENT '逻辑删除'
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='入库单 wzb';
+
+
+CREATE TABLE `plant_warehouse`
+(
+    `id`                 int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `warehouse_name`     varchar(30)      DEFAULT NULL COMMENT '仓库名称',
+    `warehouse_code`     varchar(30)      DEFAULT NULL COMMENT '仓库编码',
+    `warehouse_address`  varchar(300)     DEFAULT NULL COMMENT '仓库地址',
+    `description`         varchar(300)     DEFAULT NULL COMMENT '描述',
+    `admin_id`           int(20)          DEFAULT NULL COMMENT '管理员id',
+    `create_time`        datetime         DEFAULT NULL COMMENT '创建时间',
+    `update_time`        datetime         DEFAULT NULL COMMENT '更新时间',
+    `status`             tinyint(1)       DEFAULT NULL COMMENT '0 关闭仓库 1 开启仓库',
+    `create_by`          int(20)          DEFAULT NULL COMMENT '创建人',
+    `update_by`          int(20)          DEFAULT NULL COMMENT '更新人',
+    `warehouse_nickname` varchar(255)     DEFAULT NULL COMMENT '仓库助记名',
+    `phone`              varchar(255)     DEFAULT NULL COMMENT '仓库电话',
+    `remark`             varchar(255)     DEFAULT NULL COMMENT '备注',
+    `parent_id`          int(11)          DEFAULT NULL COMMENT '父id',
+    `remove_flag`        tinyint(1)       DEFAULT NULL COMMENT '逻辑删除（0 未删除、1 删除）',
+    `sort`               int(20) unsigned DEFAULT '0' COMMENT '排序',
+    PRIMARY KEY (`id`),
+    KEY `idx_id` (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 196
+  DEFAULT CHARSET = utf8mb4 COMMENT ='仓库表 wzb';
