@@ -1,5 +1,6 @@
 package com.farm.controller;
 
+import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,9 @@ public class BigDataController {
 
 
     @GetMapping("/print")
-    public void print () {
+    public ResponseResult<Object> print () {
         log.info("BigDataController");
+        return ResponseResult.success();
     }
 
 }
