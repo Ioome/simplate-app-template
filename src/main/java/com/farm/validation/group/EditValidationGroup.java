@@ -6,5 +6,5 @@ package com.farm.validation.group;
  * @date: 2023-04-26 16:43
  * @description: EditValidationGroup
  */
-public class EditValidationGroup {
+public interface EditValidationGroup {
 }

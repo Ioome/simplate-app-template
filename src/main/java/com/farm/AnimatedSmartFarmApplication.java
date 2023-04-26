@@ -1,6 +1,6 @@
 package com.farm;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import com.farm.data.nio.server.NettyServer;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -15,7 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.net.InetAddress;
@@ -50,11 +49,11 @@ public class AnimatedSmartFarmApplication extends SpringBootServletInitializer i
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = env.getProperty("server.port");
         String path = env.getProperty("server.servlet.context-path");
-        path = StrUtil.isNotEmpty(path) ? path : "";
+        path = CharSequenceUtil.isNotEmpty(path) ? path : "";
         log.info("\n----------------------------------------------------------\n\t"
-                + "Application Jeecg-Boot is running! Access URLs:\n\t" + "Local: \t\thttp://localhost:" + port + path
-                + "\n\t" + "External: \thttp://" + ip + ":" + port + path + "\n\t" + "swagger-ui: \thttp://" + ip
-                + ":" + port + path + "/swagger-ui.html\n\t" + "Doc: \t\thttp://" + ip + ":" + port + path
+                + "Application descr-Boot is running! Access URLs:\n\t" + "Local: \t\thttp://localhost:" + port + path
+                + "\n\t" + "External: \thttps://" + ip + ":" + port + path + "\n\t" + "swagger-ui: \thttps://" + ip
+                + ":" + port + path + "/swagger-ui.html\n\t" + "Doc: \t\thttps://" + ip + ":" + port + path
                 + "doc.html\n" + "----------------------------------------------------------");
         log.info("启动成功 V0.0.1{}", System.currentTimeMillis());
 
@@ -66,7 +65,7 @@ public class AnimatedSmartFarmApplication extends SpringBootServletInitializer i
     }
 
     @Override
-    public void run (String... args) throws Exception {
+    public void run (String... args){
         InetSocketAddress address = new InetSocketAddress(host, port);
         nettyServer.bing(address);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> nettyServer.destroy()));
