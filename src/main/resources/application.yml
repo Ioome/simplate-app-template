@@ -5,7 +5,7 @@ server:
   port: 9241
 # 请求地址
   servlet:
-    context-path: /farm/
+    context-path: /farm
 netty:
   host: 0.0.0.0
   port: 7397
@@ -45,7 +45,7 @@ spring:
 # 日志打印
 logging:
   level:
-    com.farm: debug
+    com.com.farm: debug
   file:
     path: /opt/app/app-logs/farm/
 

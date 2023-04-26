@@ -52,7 +52,9 @@ public class AnimatedSmartFarmApplication extends SpringBootServletInitializer i
         path = StrUtil.isNotEmpty(path) ? path : "";
         log.info("\n----------------------------------------------------------\n\t"
                 + "Application Jeecg-Boot is running! Access URLs:\n\t" + "Local: \t\thttp://localhost:" + port + path
-                + "/\n\t" + "External: \thttp://" + ip + ":" + port + path + "/\n\t" + "\n" + "--------------------------------------");
+                + "\n\t" + "External: \thttp://" + ip + ":" + port + path + "\n\t" + "swagger-ui: \thttp://" + ip
+                + ":" + port + path + "/swagger-ui.html\n\t" + "Doc: \t\thttp://" + ip + ":" + port + path
+                + "doc.html\n" + "----------------------------------------------------------");
         log.info("启动成功 V0.0.1{}", System.currentTimeMillis());
 
     }

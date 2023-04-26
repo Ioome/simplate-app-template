@@ -4,10 +4,8 @@ import com.farm.annotation.ApiVersion;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 
 /**
@@ -27,6 +25,7 @@ public class BigDataController {
     public ResponseResult<Object> getUser () {
         return ResponseResult.success("v1");
     }
+
     @ApiVersion("1.0.0")
     @RequestMapping("print")
     public ResponseResult<Object> getUserV1 () {
@@ -36,13 +35,13 @@ public class BigDataController {
 
     @ApiVersion("1.1.0")
     @RequestMapping("print")
-    public ResponseResult<Object> getUserV2() {
+    public ResponseResult<Object> getUserV2 () {
         return ResponseResult.success("1.1.0");
     }
 
     @ApiVersion("1.1.1")
     @RequestMapping("print")
-    public ResponseResult<Object> getUserV3() {
+    public ResponseResult<Object> getUserV3 () {
         return ResponseResult.success("1.1.1");
     }
 }
