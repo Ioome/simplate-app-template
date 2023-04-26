@@ -39,4 +39,10 @@ public class BigDataController {
     public ResponseResult<Object> getUserV2() {
         return ResponseResult.success("1.1.0");
     }
+
+    @ApiVersion("1.1.1")
+    @RequestMapping("print")
+    public ResponseResult<Object> getUserV3() {
+        return ResponseResult.success("1.1.1");
+    }
 }
