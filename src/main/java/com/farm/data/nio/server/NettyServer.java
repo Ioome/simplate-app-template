@@ -22,10 +22,6 @@ public class NettyServer {
     private final EventLoopGroup childGroup = new NioEventLoopGroup();
     private Channel channel;
 
-//    public static void main (String[] args) {
-//        NettyServer nettyServer = new NettyServer();
-//        nettyServer.bing(7311);
-//    }
 
     public ChannelFuture bing (InetSocketAddress address) {
         ChannelFuture channelFuture = null;
