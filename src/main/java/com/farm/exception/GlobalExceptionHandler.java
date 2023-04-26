@@ -36,9 +36,9 @@ public class GlobalExceptionHandler {
         log.error("Default Exception: ", e);
         return ResponseResult.fail("系统异常，请从控制台或日志中查看具体错误信息");
     }
-    @ExceptionHandler(MisException.class)
+    @ExceptionHandler(FarmException.class)
     @ResponseBody
-    public Object handleException(MisException e) {
+    public Object handleException(FarmException e) {
         log.error("MisMallException: ", e);
         return ResponseResult.fail("业务异常");
     }

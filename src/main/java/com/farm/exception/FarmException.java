@@ -11,16 +11,16 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-public class MisException extends Exception{
+public class FarmException extends Exception{
     private final Integer code;
     private final String message;
 
-    public MisException(Integer code, String message) {
+    public FarmException (Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public MisException(MisExceptionEnum exceptionEnum) {
+    public FarmException (FarmExceptionEnum exceptionEnum) {
         this(exceptionEnum.getCode(),exceptionEnum.getMes());
     }
 }

@@ -1,10 +1,15 @@
 package com.farm.exception;
 
 /**
- * @name: MisExceptionEnum
- * @description: MisExceptionEnum
+ * @author 25722
+ * @name: FarmExceptionEnum
+ * @description: FarmExceptionEnum
  */
-public enum MisExceptionEnum {
+public enum FarmExceptionEnum {
+
+    /**
+     * 枚举类
+     */
     NEED_USER_NAME(10001, "用户名不能为空"),
     NEED_PASSWORD(10002, "密码不能为空"),
     PASSWORD_TOO_SHORT(10003, "密码长度不能小于8位"),
@@ -31,26 +36,26 @@ public enum MisExceptionEnum {
     SYSTEM_ERROR(20000, "系统异常，请从控制台或日志中查看具体错误信息");
 
     int code;
-    String mes;
+    String message;
 
-    MisExceptionEnum(int code, String mes) {
+    FarmExceptionEnum (int code, String message) {
         this.code = code;
-        this.mes = mes;
+        this.message = message;
     }
 
-    public int getCode() {
+    public int getCode () {
         return code;
     }
 
-    public void setCode(int code) {
+    void setCode (int code) {
         this.code = code;
     }
 
-    public String getMes() {
-        return mes;
+    public String getMessage () {
+        return this.message;
     }
 
-    public void setMes(String mes) {
-        this.mes = mes;
+    void setMes (String message) {
+        this.message = message;
     }
 }
