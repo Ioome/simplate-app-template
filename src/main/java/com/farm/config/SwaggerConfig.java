@@ -5,12 +5,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.*;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.schema.ScalarType;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +21,22 @@ import java.util.stream.Collectors;
 /**
  * @name: SwaggerConfig
  * @author: sutton
- * @date: 2023-04-26 19:17
+ * @date: 2023-04-26 20:27
  * @description: SwaggerConfig
  */
 @Configuration
-@EnableOpenApi
-public class Swagger3Config {
+public class SwaggerConfig implements WebMvcConfigurer {
+
+
     /**
      * @return swagger config
      */
     @Bean
     public Docket openApi() {
         return new Docket(DocumentationType.OAS_30)
-                .groupName("Test group")
+                .groupName("api group")
                 .apiInfo(apiInfo())
+                .enable(true)
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
@@ -73,8 +77,8 @@ public class Swagger3Config {
         return new ApiInfoBuilder()
                 .title("Swagger API")
                 .description("test api")
-                .contact(new Contact("sutton", "https://github.com/Ioome/animated-octo-smart-farm", "2572213252@qq.com"))
-                .termsOfServiceUrl("http://xxxxxx.com/")
+                .contact(new Contact("sutton", "https://github.com/Ioome", "2572213252@qq.com"))
+                .termsOfServiceUrl("http://localhost.com/")
                 .version("1.0")
                 .build();
     }

@@ -14,6 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
@@ -28,9 +29,9 @@ import java.net.UnknownHostException;
  * @description: SpringbootSchemaApplication
  */
 @SpringBootApplication
-@EnableSwagger2
 @Slf4j
 @EnableAsync
+@EnableOpenApi
 @EnableScheduling
 @MapperScan(basePackages = "com.farm.dao")
 public class AnimatedSmartFarmApplication extends SpringBootServletInitializer implements CommandLineRunner {
