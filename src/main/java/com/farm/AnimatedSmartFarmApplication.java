@@ -2,7 +2,6 @@ package com.farm;
 
 import cn.hutool.core.util.StrUtil;
 import com.farm.data.nio.server.NettyServer;
-import io.netty.channel.ChannelFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +33,7 @@ import java.net.UnknownHostException;
 @EnableAsync
 @EnableScheduling
 @MapperScan(basePackages = "com.farm.dao")
-public class FarmSpringbootApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class AnimatedSmartFarmApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     @Value("${netty.host}")
     private String host;
@@ -44,7 +43,7 @@ public class FarmSpringbootApplication extends SpringBootServletInitializer impl
     private NettyServer nettyServer;
 
     public static void main (String[] args) throws UnknownHostException {
-        ConfigurableApplicationContext run = SpringApplication.run(FarmSpringbootApplication.class, args);
+        ConfigurableApplicationContext run = SpringApplication.run(AnimatedSmartFarmApplication.class, args);
         log.info("-----------------------------------");
         Environment env = run.getEnvironment();
         String ip = InetAddress.getLocalHost().getHostAddress();
@@ -60,7 +59,7 @@ public class FarmSpringbootApplication extends SpringBootServletInitializer impl
 
     @Override
     protected SpringApplicationBuilder configure (SpringApplicationBuilder applicationBuilder) {
-        return applicationBuilder.sources(FarmSpringbootApplication.class);
+        return applicationBuilder.sources(AnimatedSmartFarmApplication.class);
     }
 
     @Override
