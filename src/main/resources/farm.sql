@@ -259,3 +259,37 @@ CREATE TABLE `farm_permission`  (
                                    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户权限表' ROW_FORMAT = Dynamic;
 
+
+-- ----------------------------
+-- Table structure for ums_admin_role_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_admin_role_relation`;
+CREATE TABLE `farm_admin_role_relation`  (
+                                            `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                            `admin_id` bigint(20) NULL DEFAULT NULL,
+                                            `role_id` bigint(20) NULL DEFAULT NULL,
+                                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户和角色关系表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for ums_role_permission_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_role_permission_relation`;
+CREATE TABLE `farm_role_permission_relation`  (
+                                                 `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                                 `role_id` bigint(20) NULL DEFAULT NULL,
+                                                 `permission_id` bigint(20) NULL DEFAULT NULL,
+                                                 PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户角色和权限关系表' ROW_FORMAT = Dynamic;
+
+
+DROP TABLE IF EXISTS `ums_admin_permission_relation`;
+CREATE TABLE `farm_admin_permission_relation`  (
+                                                  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                                  `admin_id` bigint(20) NULL DEFAULT NULL,
+                                                  `permission_id` bigint(20) NULL DEFAULT NULL,
+                                                  `type` int(1) NULL DEFAULT NULL,
+                                                  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户和权限关系表(除角色中定义的权限以外的加减权限)' ROW_FORMAT = Dynamic;
+
