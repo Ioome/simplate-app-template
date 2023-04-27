@@ -1,6 +1,7 @@
 package com.farm.controller;
 
 import com.farm.entity.po.FarmAdmin;
+import com.farm.exception.FarmException;
 import com.farm.exception.FarmExceptionEnum;
 import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,7 +67,8 @@ public class FarmUserAdminController {
 
     @ApiOperation(value = "退出登录")
     @PostMapping(value = "/logout")
-    public Object logout () {
+    @Transactional(rollbackFor = Exception.class)
+    public Object logout () throws FarmException {
         farmAdminService.logout();
         return ResponseResult.success("退出成功");
     }

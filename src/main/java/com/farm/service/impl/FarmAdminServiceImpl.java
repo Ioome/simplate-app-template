@@ -3,6 +3,9 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmAdmin;
+import com.farm.exception.BaseRuntimeException;
+import com.farm.exception.FarmException;
+import com.farm.exception.FarmExceptionEnum;
 import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
 import com.farm.service.admin.AdminUserDetails;
@@ -117,6 +120,9 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
     public void logout () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AdminUserDetails loginUser = (AdminUserDetails) authentication.getPrincipal();
+        if (loginUser == null) {
+            throw new BaseRuntimeException();
+        }
         Long userid = loginUser.getUser().getId();
         redisCache.deleteObject("token_:" + userid);
     }

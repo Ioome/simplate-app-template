@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //TODO: 判断是否为空权限如果为空权限则直接返回用户
         //TODO: 如果权限或者用户不等于空返回用户和权限信息
         //封装成UserDetails对象返回
-        //TODO 根据用户查询权限信息 添加到LoginUser中
+        //TO 根据用户查询权限信息 添加到LoginUser中OD
         List<String> list = new ArrayList<>(Arrays.asList("test"));
         return new AdminUserDetails(user, list);
     }

@@ -237,14 +237,19 @@ CREATE TABLE `farm_admin`  (
 -- Table structure for ums_role
 DROP TABLE IF EXISTS `farm_role`;
 CREATE TABLE `farm_role`  (
-                             `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                             `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-                             `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-                             `admin_count` int(11) NULL DEFAULT NULL COMMENT '后台用户数量',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `status` int(1) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
-                             `sort` int(11) NULL DEFAULT 0,
-                             PRIMARY KEY (`id`) USING BTREE
+                              `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                              `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称: 角色权限字符串',
+                              `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述:角色权限字符串 ',
+                              `admin_count` int(11) NULL DEFAULT NULL COMMENT '后台用户数量',
+                              `status` int(1) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
+                              `sort` int(11) NULL DEFAULT 0,
+                              `created_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                              `update_time`          datetime              DEFAULT NULL COMMENT '更新时间',
+                              `update_by`            INT                   DEFAULT NULL COMMENT '更新人',
+                              `create_by`            INT                   DEFAULT NULL COMMENT '创建人',
+                              `delete_time`          datetime              DEFAULT NULL COMMENT '删除（null.正常)',
+                              `remark` varchar(500) DEFAULT NULL COMMENT '备注'
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户角色表' ROW_FORMAT = Dynamic;
 
 
@@ -252,42 +257,53 @@ CREATE TABLE `farm_role`  (
 -- Table structure for ums_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `farm_permission`;
-CREATE TABLE `farm_permission`  (
-                                   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                                   `pid` bigint(20) NULL DEFAULT NULL COMMENT '父级权限id',
-                                   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-                                   `value` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限值',
-                                   `icon` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
-                                   `type` int(1) NULL DEFAULT NULL COMMENT '权限类型：0->目录；1->菜单；2->按钮（接口绑定权限）',
-                                   `uri` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '前端资源路径',
-                                   `status` int(1) NULL DEFAULT NULL COMMENT '启用状态；0->禁用；1->启用',
-                                   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
-                                   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户权限表' ROW_FORMAT = Dynamic;
+CREATE TABLE `farm_permission` (
+                                   `id` BIGINT ( 20 ) NOT NULL AUTO_INCREMENT,
+                                   `pid` BIGINT ( 20 ) NULL DEFAULT NULL COMMENT '父级权限id',
+                                   `name` VARCHAR ( 100 ) CHARACTER  SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单名称',
+                                   `value` VARCHAR ( 200 ) CHARACTER  SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限标识',
+                                   `icon` VARCHAR ( 500 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
+                                   `type` INT ( 1 )  DEFAULT NULL COMMENT '权限类型：0->目录；1->菜单；2->按钮（接口绑定权限）',
+                                   `url` VARCHAR ( 200 ) CHARACTER  SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '前端资源路径',
+                                   `component_url` varchar(255) DEFAULT NULL COMMENT '组件路径',
+                                   `status` INT ( 1 ) NULL DEFAULT 1 COMMENT '启用状态；0->禁用；1->启用',
+                                   `visible` CHAR ( 1 ) DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+                                   `sort` INT ( 11 ) NULL DEFAULT NULL COMMENT '排序',
+                                   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                   `update_by` INT DEFAULT NULL COMMENT '更新人',
+                                   `create_by` INT DEFAULT NULL COMMENT '创建人',
+                                   `delete_time` datetime DEFAULT NULL COMMENT '删除（null.正常)',
+                                   `remark` VARCHAR ( 500 ) DEFAULT NULL COMMENT '备注',
+                                   PRIMARY KEY ( `id` ) USING BTREE
+) ENGINE = INNODB AUTO_INCREMENT = 19 CHARACTER
+    SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户权限表' ROW_FORMAT = Dynamic;
 
 
+
+-- Table structure for ums_admin_role_relation，用户具有多个角色，角色也可以分配给多个用户，所以是多对多的关系
 -- ----------------------------
--- Table structure for ums_admin_role_relation
--- ----------------------------
-DROP TABLE IF EXISTS `ums_admin_role_relation`;
+DROP TABLE IF EXISTS `farm_admin_role_relation`;
 CREATE TABLE `farm_admin_role_relation`  (
-                                            `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                                            `admin_id` bigint(20) NULL DEFAULT NULL,
-                                            `role_id` bigint(20) NULL DEFAULT NULL,
-                                            PRIMARY KEY (`id`) USING BTREE
+                                             `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                             `admin_id` bigint(20) NULL DEFAULT NULL,
+                                             `role_id` bigint(20) NULL DEFAULT NULL,
+                                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户和角色关系表' ROW_FORMAT = Dynamic;
 
 
+
+
+
 -- ----------------------------
--- Table structure for ums_role_permission_relation
+-- Table structure for ums_role_permission_relation 从角色到权限来看，它是有一对多的权限， 但是站在权限的角度来看， 它是一个多对多
 -- ----------------------------
 DROP TABLE IF EXISTS `ums_role_permission_relation`;
 CREATE TABLE `farm_role_permission_relation`  (
-                                                 `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                                                 `role_id` bigint(20) NULL DEFAULT NULL,
-                                                 `permission_id` bigint(20) NULL DEFAULT NULL,
-                                                 PRIMARY KEY (`id`) USING BTREE
+                                                  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                                  `role_id` bigint(20) NULL DEFAULT NULL,
+                                                  `permission_id` bigint(20) NULL DEFAULT NULL,
+                                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户角色和权限关系表' ROW_FORMAT = Dynamic;
 
 
