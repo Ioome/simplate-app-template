@@ -14,7 +14,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <fastjson.version>2.0.25</fastjson.version>
+        <fastjson.version>1.2.33</fastjson.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
     </properties>
 
@@ -64,6 +64,12 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
+        </dependency>
+        <!-- 	fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
         <!--  springmvc-->
         <dependency>
@@ -122,12 +128,7 @@
             <version>2.11.0</version>
         </dependency>
 
-        <!-- 	fastjson-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
+
         <!--	springboot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

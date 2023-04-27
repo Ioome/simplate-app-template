@@ -15,6 +15,7 @@ public enum FarmExceptionEnum {
     PASSWORD_TOO_SHORT(10003, "密码长度不能小于8位"),
     NAME_EXISTED(10004, "不允许重名"),
     INSERT_FAILED(10005, "插入失败，请重试"),
+    LOGIN_ERROR(500, "注册失败"),
     WRONG_PASSWORD(10006, "密码错误"),
     NEED_LOGIN(10007, "用户未登录"),
     UPDATE_FAILED(10008, "更新失败"),

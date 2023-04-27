@@ -214,15 +214,22 @@ CREATE TABLE `farm_plant_warehouse`
 DROP TABLE IF EXISTS `farm_admin`;
 CREATE TABLE `farm_admin`  (
                               `id` bigint(20) NOT NULL AUTO_INCREMENT ,
-                              `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                              `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                              `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
+                              `nick_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
+                              `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
+                              `status` int(1) NULL DEFAULT 1 COMMENT '帐号启用状态：0->禁用；1->启用',
+                              `phone` VARCHAR(32) DEFAULT NULL COMMENT '手机号',
+                              `sex` CHAR(1) DEFAULT NULL COMMENT '用户性别（0男，1女，2未知）',
+                              `user_type` CHAR(1) NOT NULL DEFAULT '1' COMMENT '用户类型（0管理员，1普通用户）',
                               `icon` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
                               `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-                              `nick_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
                               `note` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息',
-                              `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
                               `login_time` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
-                              `status` int(1) NULL DEFAULT 1 COMMENT '帐号启用状态：0->禁用；1->启用',
+                              `created_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                              `update_time`          datetime              DEFAULT NULL COMMENT '更新时间',
+                              `update_by`            INT                   DEFAULT NULL COMMENT '更新人',
+                              `create_by`            INT                   DEFAULT NULL COMMENT '创建人',
+                              `delete_time`          datetime              DEFAULT NULL COMMENT '删除（null.正常)',
                               PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台用户表' ROW_FORMAT = Dynamic;
 

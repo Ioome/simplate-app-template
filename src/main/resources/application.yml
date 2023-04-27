@@ -25,7 +25,7 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
   redis:
-    database: 1
+    database: 0
     host: 119.91.218.241
     port: 9978
     jedis:

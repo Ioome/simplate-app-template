@@ -1,11 +1,22 @@
 package com.farm.controller;
 
+import com.farm.entity.po.FarmAdmin;
+import com.farm.exception.FarmExceptionEnum;
+import com.farm.service.FarmAdminService;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @name: FarmUserAdminController
@@ -17,28 +28,43 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Controller
 @Api(tags = "FarmUserAdminController", value = "后台用户管理")
-@RequestMapping("api/{v}/admin")
+@RequestMapping("/api/admin")
 public class FarmUserAdminController {
+
+    @Resource
+    private FarmAdminService farmAdminService;
+
 
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
     @ResponseBody
-    public ResponseResult<Object> register () {
-        return null;
+    public Object register (@RequestBody FarmAdmin umsAdminParam, BindingResult result) {
+        FarmAdmin umsAdmin = farmAdminService.register(umsAdminParam);
+        if (umsAdmin == null) {
+            ResponseResult.fail(FarmExceptionEnum.LOGIN_ERROR.getMessage());
+        }
+        return ResponseResult.success(umsAdmin);
     }
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")
     @ResponseBody
-    public ResponseResult<Object> login () {
-        return null;
+    public Object login (@RequestBody FarmAdmin farmAdmin, BindingResult result) {
+        String token = farmAdminService.login(farmAdmin);
+        if (token == null) {
+            return ResponseResult.fail("用户名或密码错误");
+        }
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", token);
+        tokenMap.put("tokenHead", "token");
+        return ResponseResult.success(tokenMap);
     }
 
-    @ApiOperation("获取用户所有权限（包括+-权限）")
-    @GetMapping(value = "/permission/{adminId}")
-    @ResponseBody
-    public Object getPermissionList (@PathVariable Long adminId) {
-        return null;
-    }
 
+    @ApiOperation(value = "退出登录")
+    @PostMapping(value = "/logout")
+    public Object logout () {
+        farmAdminService.logout();
+        return ResponseResult.success("退出成功");
+    }
 }

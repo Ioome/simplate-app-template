@@ -32,7 +32,7 @@ import java.net.UnknownHostException;
 @EnableAsync
 @EnableSwagger2
 @EnableScheduling
-@MapperScan(basePackages = "com.farm.dao")
+@MapperScan(basePackages = "com.farm.mapper")
 public class AnimatedSmartFarmApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     @Value("${netty.host}")
