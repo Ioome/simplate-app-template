@@ -213,7 +213,7 @@ CREATE TABLE `farm_plant_warehouse`
 -- ----------------------------
 DROP TABLE IF EXISTS `farm_admin`;
 CREATE TABLE `farm_admin`  (
-                              `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                              `id` bigint(20) NOT NULL AUTO_INCREMENT ,
                               `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
                               `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
                               `icon` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',

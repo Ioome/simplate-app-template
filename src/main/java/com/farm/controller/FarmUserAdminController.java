@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
-@Api(tags = "UmsAdminController", description = "后台用户管理")
+@Api(tags = "FarmUserAdminController", value = "后台用户管理")
 @RequestMapping("api/{v}/admin")
 public class FarmUserAdminController {
 
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
     @ResponseBody
-    public ResponseResult register () {
-        return ResponseResult.fail(null);
+    public ResponseResult<Object> register () {
+        return null;
     }
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")
     @ResponseBody
-    public ResponseResult login () {
+    public ResponseResult<Object> login () {
         return null;
     }
 
