@@ -103,6 +103,8 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         }
         //登录时间
         AdminUserDetails finalUser = (AdminUserDetails) authenticate.getPrincipal();
+
+        //修改登录时间
         Long userId = finalUser.getUser().getId();
         String token = JwtUtil.createJWT(String.valueOf(userId));
         LOGGER.info("时间 {}, 放入 redis", new Date());

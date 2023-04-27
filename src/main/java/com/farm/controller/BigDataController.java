@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BigDataController {
 
 
-    @PreAuthorize("hasAuthority('test333')")
+    @PreAuthorize("hasAuthority('system:dept:list')")
     @RequestMapping("print")
     public ResponseResult<Object> getUser () {
         return ResponseResult.success("v1");

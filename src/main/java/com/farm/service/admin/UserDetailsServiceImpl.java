@@ -3,6 +3,7 @@ package com.farm.service.admin;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.farm.entity.po.FarmAdmin;
 import com.farm.mapper.FarmAdminMapper;
+import com.farm.mapper.FarmPermissionMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Resource
     private FarmAdminMapper farmAdminMapper;
 
+    @Resource
+    private FarmPermissionMapper farmPermissionMapper;
 
     /**
      * 校验用户
@@ -43,11 +46,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("校验结果： 用户名或密码错误");
         }
-        //TODO: 判断是否为空权限如果为空权限则直接返回用户
-        //TODO: 如果权限或者用户不等于空返回用户和权限信息
+        //        List<String> list = new ArrayList<>(Arrays.asList("test"));
         //封装成UserDetails对象返回
         //TO 根据用户查询权限信息 添加到LoginUser中OD
-        List<String> list = new ArrayList<>(Arrays.asList("test"));
-        return new AdminUserDetails(user, list);
+        List<String> permsByUserIdLists = farmPermissionMapper.selectPermsByUserId(user.getId());
+        return new AdminUserDetails(user, permsByUserIdLists);
     }
 }
