@@ -2,7 +2,6 @@ package com.farm.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.farm.entity.po.FarmAdmin;
-import com.farm.exception.FarmException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,5 +32,5 @@ public interface FarmAdminService extends IService<FarmAdmin> {
      */
     String login (FarmAdmin farmAdmin);
 
-    void logout () throws FarmException;
+    void logout ();
 }

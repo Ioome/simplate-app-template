@@ -1,6 +1,8 @@
 package com.farm.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.farm.utils.ResponseResult;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -20,9 +22,10 @@ import java.io.IOException;
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence (HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        String json = JSON.toJSONString(ResponseResult.fail(HttpStatus.UNAUTHORIZED.value(), "认证失败请重新登录"));
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println((ResponseResult.fail(authException.getMessage())));
+        response.getWriter().println(json);
         response.getWriter().flush();
     }
 }

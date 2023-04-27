@@ -3,15 +3,11 @@ package com.farm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.farm.entity.po.FarmAdmin;
-import com.farm.exception.BaseRuntimeException;
-import com.farm.exception.FarmException;
-import com.farm.exception.FarmExceptionEnum;
 import com.farm.mapper.FarmAdminMapper;
 import com.farm.service.FarmAdminService;
 import com.farm.service.admin.AdminUserDetails;
 import com.farm.utils.JwtUtil;
 import com.farm.utils.RedisCache;
-import com.farm.utils.ResponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -123,7 +119,7 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AdminUserDetails loginUser = (AdminUserDetails) authentication.getPrincipal();
         if (loginUser == null) {
-            throw new BaseRuntimeException();
+            throw new RuntimeException("退出失败");
         }
         Long userid = loginUser.getUser().getId();
         redisCache.deleteObject("token_:" + userid);
