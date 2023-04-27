@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -42,7 +45,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         //TODO: 判断是否为空权限如果为空权限则直接返回用户
         //TODO: 如果权限或者用户不等于空返回用户和权限信息
+        List<String> permissionList = new ArrayList<>(Arrays.asList("admin", "test"));
         //封装成UserDetails对象返回
-        return new AdminUserDetails(user);
+        return new AdminUserDetails(user, permissionList);
     }
 }

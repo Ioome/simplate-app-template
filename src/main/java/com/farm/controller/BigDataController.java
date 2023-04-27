@@ -4,6 +4,7 @@ import com.farm.annotation.ApiVersion;
 import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BigDataController {
 
 
+    @PreAuthorize("hasAnyRole('test')")
     @RequestMapping("print")
     public ResponseResult<Object> getUser () {
         return ResponseResult.success("v1");

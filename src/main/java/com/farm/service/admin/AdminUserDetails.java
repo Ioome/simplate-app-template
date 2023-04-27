@@ -1,14 +1,18 @@
 package com.farm.service.admin;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.farm.entity.po.FarmAdmin;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @name: LoginUser
@@ -18,11 +22,18 @@ import java.util.Collection;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class AdminUserDetails implements UserDetails {
 
 
     private FarmAdmin user;
+
+
+    private List<String> permissionList;
+
+    public AdminUserDetails (FarmAdmin user, List<String> permissionList) {
+        this.user = user;
+        this.permissionList = permissionList;
+    }
 
     public FarmAdmin getUser () {
         return user;
@@ -32,9 +43,22 @@ public class AdminUserDetails implements UserDetails {
         this.user = user;
     }
 
+    /**
+     * 存储SpringSecurity所需要的权限信息的集合
+     */
+    @JSONField(serialize = false)
+    private List<GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities () {
-        return new ArrayList<>();
+        if (authorities != null) {
+            return authorities;
+        }
+        //把permissions中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中
+        authorities = permissionList.stream().
+                map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+        return authorities;
     }
 
     @Override
