@@ -25,9 +25,7 @@ public class JwtUtil {
      * @throws Exception 异常
      */
     public static void main (String[] args) throws Exception {
-        String jwt = createJWT("123");
-        log.info("jwt:{}", jwt);
-        Claims claims = parseJWT(jwt);
+        Claims claims = parseJWT("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwZDQ1ZGJkMWJjNmE0M2M4YjlmYzg0ODY4MGZmNjEyYiIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTY4MjU4MTk2OCwiZXhwIjoxNjgyNTg1NTY4fQ.onlhC3wQVPy0g4htCMDkarbubh6ZgxJjS57z6Wij4VY");
         log.info("claims:{}", claims);
     }
 

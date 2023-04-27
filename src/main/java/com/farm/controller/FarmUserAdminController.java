@@ -7,6 +7,7 @@ import com.farm.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,7 @@ public class FarmUserAdminController {
         }
         return ResponseResult.success(umsAdmin);
     }
+
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping(value = "/login")

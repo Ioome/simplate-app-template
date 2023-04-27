@@ -43,12 +43,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //从请求头中获取token
         String token = request.getHeader("token");
+        //StringUtils.hasText(token) 判断字符串是否有值
         if (!StringUtils.hasText(token)) {
             //放行
             filterChain.doFilter(request, response);
             return;
         }
-
         String userid;
         try {
             Claims claims = JwtUtil.parseJWT(token);
@@ -59,8 +59,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         //从redis中获取用户信息
-        String redisKey = "token_:" + userid;
-        //TODO:  权限信息
+        String redisKey = "token_" + userid;
         AdminUserDetails loginUser = redisCache.getCacheObject(redisKey);
         if (Objects.isNull(loginUser)) {
             throw new RuntimeException("用户未登录");

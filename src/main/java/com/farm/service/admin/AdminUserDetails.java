@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +21,24 @@ import java.util.stream.Collectors;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class AdminUserDetails implements UserDetails {
 
 
     private FarmAdmin user;
 
+    /**
+     * 存储权限信息
+     */
+    private List<String> permissions;
 
-    private List<String> permissionList;
 
-    public AdminUserDetails (FarmAdmin user, List<String> permissionList) {
+    @JSONField(serialize = false)
+    private List<GrantedAuthority> authorities;
+
+    public AdminUserDetails (FarmAdmin user, List<String> permissions) {
         this.user = user;
-        this.permissionList = permissionList;
+        this.permissions = permissions;
     }
 
     public FarmAdmin getUser () {
@@ -43,11 +49,6 @@ public class AdminUserDetails implements UserDetails {
         this.user = user;
     }
 
-    /**
-     * 存储SpringSecurity所需要的权限信息的集合
-     */
-    @JSONField(serialize = false)
-    private List<GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities () {
@@ -55,9 +56,7 @@ public class AdminUserDetails implements UserDetails {
             return authorities;
         }
         //把permissions中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中
-        authorities = permissionList.stream().
-                map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         return authorities;
     }
 
