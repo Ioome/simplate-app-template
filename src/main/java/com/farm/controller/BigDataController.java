@@ -20,30 +20,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/{v}/data")
 @Api(value = "BigDataController", tags = "data Interface")
 public class BigDataController {
-
-
-    @PreAuthorize("hasAuthority('system:dept:list')")
-    @RequestMapping("print")
-    public ResponseResult<Object> getUser () {
-        return ResponseResult.success("v1");
-    }
-
-    @ApiVersion("1.0.0")
-    @RequestMapping("print")
-    public ResponseResult<Object> getUserV1 () {
-        return ResponseResult.success("1.0.0");
-    }
-
-
-    @ApiVersion("1.1.0")
-    @RequestMapping("print")
-    public ResponseResult<Object> getUserV2 () {
-        return ResponseResult.success("1.1.0");
-    }
-
-    @ApiVersion("1.1.1")
-    @RequestMapping("print")
-    public ResponseResult<Object> getUserV3 () {
-        return ResponseResult.success("1.1.1");
-    }
 }
