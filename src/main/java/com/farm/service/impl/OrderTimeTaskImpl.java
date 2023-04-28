@@ -12,11 +12,10 @@ import org.springframework.stereotype.Component;
  * @version: 1.0
  * @since: JDK 1.8
  * @see: com.farm.service.impl
- *
  */
 @Component
 public class OrderTimeTaskImpl {
-    private Logger lOGGER = LoggerFactory.getLogger(OrderTimeTaskImpl.class);
+    private final static Logger logger = LoggerFactory.getLogger(OrderTimeTaskImpl.class);
 
     /**
      * cron表达式：Seconds Minutes Hours DayofMonth Month DayofWeek [Year]
@@ -24,6 +23,6 @@ public class OrderTimeTaskImpl {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     private void cancelTimeOutOrder () {
-        lOGGER.info("测试定时任务");
+        logger.info("测试定时任务");
     }
 }
