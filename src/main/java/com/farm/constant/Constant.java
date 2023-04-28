@@ -4,7 +4,7 @@ package com.farm.constant;
  * @name: Constant
  * @author: sutton
  * @date: 2023-04-26 23:27
- * @description: Constant
+ * @description: 通用常量
  */
 public class Constant {
     /**

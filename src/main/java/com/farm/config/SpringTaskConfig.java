@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @name: SpringTaskConfig
  * @author: sutton
  * @date: 2023-04-28 08:11
- * @description: SpringTaskConfig
+ * @description: 全局定时任务配置
  */
 
 @Configuration
