@@ -54,7 +54,6 @@ public class AnimatedSmartFarmApplication extends SpringBootServletInitializer i
                 + "Application descr-Boot is running! Access URLs:\n\t" + "Local: \t\thttp://localhost:" + port + path
                 + "\n\t" + "External: \thttps://" + ip + ":" + port + path + "\n\t" + "----------------------------------------------------------");
         log.info("启动成功 V0.0.1{}", System.currentTimeMillis());
-
     }
 
     @Override
