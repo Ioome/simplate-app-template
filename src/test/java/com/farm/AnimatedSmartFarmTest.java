@@ -33,4 +33,6 @@ class AnimatedSmartFarmTest {
         String encode = cryptPasswordEncoder.encode("9978@wzb");
         System.out.printf("加密后的密码是：%s", encode);
     }
+
+
 }
