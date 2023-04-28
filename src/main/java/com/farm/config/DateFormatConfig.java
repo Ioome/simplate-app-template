@@ -30,7 +30,7 @@ public class DateFormatConfig {
      * @date 2020/8/31 18:22
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilder() {
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilder () {
 
         return builder -> {
             TimeZone tz = TimeZone.getTimeZone("UTC");
@@ -48,12 +48,12 @@ public class DateFormatConfig {
      * @description LocalDate 类型全局时间格式化
      * @date 2020/8/31 18:22
      */
-    public LocalDateTimeSerializer localDateTimeDeserializer() {
+    public LocalDateTimeSerializer localDateTimeDeserializer () {
         return new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(pattern));
     }
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer () {
         return builder -> builder.serializerByType(LocalDateTime.class, localDateTimeDeserializer());
     }
 }
