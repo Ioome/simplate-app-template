@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * @name: OrderTimeOutCancelTask
  * @description: OrderTimeOutCancelTask
@@ -23,6 +25,6 @@ public class OrderTimeTaskImpl {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     private void cancelTimeOutOrder () {
-        logger.info("测试定时任务");
+        logger.info("测试定时任务 {}", new Date());
     }
 }
