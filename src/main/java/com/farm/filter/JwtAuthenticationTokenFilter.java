@@ -1,6 +1,5 @@
 package com.farm.filter;
 
-import com.farm.entity.po.FarmAdmin;
 import com.farm.service.admin.AdminUserDetails;
 import com.farm.utils.JwtUtil;
 import com.farm.utils.RedisCache;

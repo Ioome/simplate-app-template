@@ -11,7 +11,11 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * @author sutton
+ * @name: MyServerHandler
+ * @date: 2023-04-24 09:48
+ */
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(MyServerHandler.class);

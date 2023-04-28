@@ -80,12 +80,12 @@ public class FarmAdminServiceImpl extends ServiceImpl<FarmAdminMapper, FarmAdmin
         return umsAdminParam;
     }
 
+
     /**
      * 登录功能
      *
-     * @param username 用户名
-     * @param password 密码
-     * @return 生成的JWT的token
+     * @param farmAdmin 用户参数
+     * @return token
      */
     @Override
     public String login (FarmAdmin farmAdmin) {
