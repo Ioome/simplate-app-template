@@ -66,7 +66,7 @@ public class FarmUserAdminController {
     @ApiOperation(value = "退出登录")
     @PostMapping(value = "/logout")
     @Transactional(rollbackFor = Exception.class)
-    public Object logout ()  {
+    public Object logout () {
         farmAdminService.logout();
         return ResponseResult.success("退出成功");
     }

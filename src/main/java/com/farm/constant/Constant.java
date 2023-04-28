@@ -9,6 +9,7 @@ package com.farm.constant;
 public class Constant {
     /**
      * 表达是否常量枚举
+     *
      * @author wx
      */
     public interface YesOrNoConstant {
@@ -23,7 +24,13 @@ public class Constant {
          */
         Integer NO = 0;
 
-        static  Integer valueOf(Boolean yesOrNo){
+        /**
+         * 根据boolean获取Integer
+         *
+         * @param yesOrNo true是false否
+         * @return Integer
+         */
+        static Integer valueOf (Boolean yesOrNo) {
             return yesOrNo.equals(YesOrNoBooleanConstant.YES) ? YES : NO;
         }
     }
@@ -31,6 +38,7 @@ public class Constant {
 
     /**
      * 表达是否常量枚举
+     *
      * @author wx
      */
     public interface YesOrNoBooleanConstant {
@@ -45,7 +53,13 @@ public class Constant {
          */
         boolean NO = false;
 
-        static boolean valueOf(Integer yesOrNo){
+        /**
+         * 根据Integer获取boolean
+         *
+         * @param yesOrNo 1是0否
+         * @return boolean
+         */
+        static boolean valueOf (Integer yesOrNo) {
             return yesOrNo.equals(YesOrNoConstant.YES) ? YES : NO;
         }
 
@@ -53,16 +67,23 @@ public class Constant {
 
     public interface YesOrNoStringConstant {
 
-        static String valueOf(Integer yesOrNo){
+
+        /**
+         * 根据Integer获取boolean
+         *
+         * @param yesOrNo 1是0否
+         * @return boolean
+         */
+        static String valueOf (Integer yesOrNo) {
             return yesOrNo.equals(YesOrNoConstant.YES) ? "是" : "否";
         }
 
     }
 
 
-
     /**
      * 状态常量
+     *
      * @author wx
      */
     public interface StatusConstant {

@@ -13,10 +13,19 @@ import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
+
+/**
+ * @author sutton
+ * @name: NettyServer
+ * @description: NettyServer
+ * @date: 2023-04-24 09:48
+ * @version: 1.0.0
+ * @since: JDK 1.8
+ */
 @Component("nettyServer")
 public class NettyServer {
 
-    private Logger logger = LoggerFactory.getLogger(NettyServer.class);
+    private final  Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
     private final EventLoopGroup parentGroup = new NioEventLoopGroup();
     private final EventLoopGroup childGroup = new NioEventLoopGroup();
