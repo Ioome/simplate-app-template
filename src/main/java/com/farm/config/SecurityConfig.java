@@ -20,42 +20,74 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @name: SecurityConfig
  * @author: sutton
  * @date: 2023-04-27 13:22
+ * @version: 1.1.0
  * @description: SecurityConfig
+ * @description: 认证与权限控制
+ * @since JDK 1.8
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    /**
+     * @description: 用于配置需要拦截的url路径、jwt过滤器
+     */
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+
+    /**
+     * @description: 用于处理认证失败（token错误）的类
+     */
     @Autowired
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+
+    /**
+     * @description: 用于处理认证失败（无token）的类
+     */
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
+    /**
+     * @return org.springframework.security.crypto.password.PasswordEncoder
+     * @description: 解决数据库 {noop},解决请求密钥参数与数据库注册后加密数据对比
+     */
     @Bean
     public PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
     }
 
 
+    /**
+     * @return org.springframework.security.authentication.AuthenticationManager
+     * @throws Exception 异常
+     * @description: 用于支持 password 模式
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean () throws Exception {
         return super.authenticationManagerBean();
     }
 
+
+    /**
+     * @param http http 请求
+     * @throws Exception 异常
+     * @description 配置 security
+     */
     @Override
     protected void configure (HttpSecurity http) throws Exception {
-        http.csrf()// 由于使用的是JWT，我们这里不需要csrf
+        // 使用JWT，不需要csrf
+        http.csrf()
                 .disable()
-                .sessionManagement()// 基于token，所以不需要session
+                // 基于token，所以不需要session
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, // 允许对于网站静态资源的无授权访问
+                // 允许对于网站静态资源的无授权访问
+                .antMatchers(HttpMethod.GET,
                         "/",
                         "/*.html",
                         "/favicon.ico",

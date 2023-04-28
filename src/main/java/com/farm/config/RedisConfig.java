@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @name: RedisConfig
  * @author: sutton
  * @date: 2023-04-27 11:06
- * @description: RedisConfig
+ * @description:  使用StringRedisSerializer来序列化和反序列化redis的key值 Hash的key也采用StringRedisSerializer的序列化方式
  */
 @Configuration
 public class RedisConfig {
@@ -23,11 +23,9 @@ public class RedisConfig {
 
         FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
 
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(serializer);
 
-        // Hash的key也采用StringRedisSerializer的序列化方式
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(serializer);
 
