@@ -12,8 +12,10 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
+
 /**
- * JWT工具类
+ * @name: JwtUtil
+ * @description: JwtUtil
  */
 @Slf4j
 public class JwtUtil {

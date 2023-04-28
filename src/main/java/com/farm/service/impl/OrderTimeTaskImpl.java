@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
+ * @author sutton
  * @name: OrderTimeOutCancelTask
  * @description: OrderTimeOutCancelTask
  * @date: 2023-04-28 08:11
@@ -17,10 +18,10 @@ import java.util.Date;
  */
 @Component
 public class OrderTimeTaskImpl {
-    private final static Logger logger = LoggerFactory.getLogger(OrderTimeTaskImpl.class);
+    private final  Logger logger = LoggerFactory.getLogger(OrderTimeTaskImpl.class);
 
     /**
-     * cron表达式：Seconds Minutes Hours DayofMonth Month DayofWeek [Year]
+     * cron表达式：Seconds Minutes Hours Day-ofMonth Month Day-ofWeek [Year]
      * 每 1 分钟触发一次: 0 0/1 * * * ?
      */
     @Scheduled(cron = "0 0/1 * * * ?")

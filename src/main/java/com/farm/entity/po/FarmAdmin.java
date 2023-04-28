@@ -23,9 +23,6 @@ public class FarmAdmin implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
-    /**
-     * id
-     */
     @ApiModelProperty("id")
     private Long id;
 

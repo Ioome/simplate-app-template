@@ -14,6 +14,13 @@ import java.util.List;
  */
 @Mapper
 public interface FarmPermissionMapper extends BaseMapper<FarmPermission> {
-    List<String> selectPermsByUserId(Long id);
+
+    /**
+     * 根据用户id查询权限
+     *
+     * @param id 用户id
+     * @return 权限列表
+     */
+    List<String> selectPermsByUserId (Long id);
 }
 

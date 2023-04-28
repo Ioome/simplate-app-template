@@ -15,22 +15,31 @@ public interface FarmAdminService extends IService<FarmAdmin> {
 
     /**
      * 根据用户名获取后台管理员
+     *
+     * @param username 用户名
+     * @return FarmAdmin
      */
     FarmAdmin getAdminByUsername (String username);
 
     /**
      * 注册功能
+     *
+     * @param umsAdminParam 用户参数
+     * @return FarmAdmin
      */
     FarmAdmin register (FarmAdmin umsAdminParam);
+
 
     /**
      * 登录功能
      *
-     * @param username 用户名
-     * @param password 密码
-     * @return 生成的JWT的token
+     * @param farmAdmin 用户参数
+     * @return token
      */
     String login (FarmAdmin farmAdmin);
 
+    /**
+     * 登出功能
+     */
     void logout ();
 }

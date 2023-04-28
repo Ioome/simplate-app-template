@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,9 +44,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("校验结果： 用户名或密码错误");
         }
-        //        List<String> list = new ArrayList<>(Arrays.asList("test"));
-        //封装成UserDetails对象返回
-        //TO 根据用户查询权限信息 添加到LoginUser中OD
         List<String> permsByUserIdLists = farmPermissionMapper.selectPermsByUserId(user.getId());
         return new AdminUserDetails(user, permsByUserIdLists);
     }

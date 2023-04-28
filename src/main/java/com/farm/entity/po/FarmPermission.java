@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,18 +18,15 @@ import java.util.Date;
  * @date: 2023-04-27 22:44
  * @description: FarmPermission
  */
-@TableName(value="farm_permission")
+@TableName(value = "farm_permission")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FarmPermission  implements Serializable {
+public class FarmPermission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
-    /**
-     * id
-     */
     @ApiModelProperty("id")
     private Long id;
 

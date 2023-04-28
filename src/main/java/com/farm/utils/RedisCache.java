@@ -139,7 +139,7 @@ public class RedisCache{
     /**
      * 获得缓存的set
      *
-     * @param key
+     * @param key 缓存键值
      * @return
      */
     public <T> Set<T> getCacheSet (final String key) {
